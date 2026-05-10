@@ -13,816 +13,563 @@
   --text:#f0f2f8;--text2:#8891a8;--text3:#4a5268;
   --accent:#9945FF;--accent2:#14F195;--accent3:#00D4FF;
   --red:#ff4f4f;--amber:#ffb547;
-  --card-r:16px;--sm-r:10px;
 }
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
-.app{display:grid;grid-template-columns:260px 1fr;height:100vh;overflow:hidden}
-.sidebar{background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column}
-.logo{padding:24px 20px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:#fff}
+html,body{height:100%;overflow:hidden}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;height:100vh}
+/* SIDEBAR */
+.sidebar{width:260px;min-width:260px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;height:100vh;overflow:hidden}
+.logo{padding:24px 20px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-shrink:0}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:#fff;flex-shrink:0}
 .logo-text{font-family:'Space Mono',monospace;font-size:13px;font-weight:700}
 .logo-sub{font-size:10px;color:var(--text2);margin-top:1px}
-.wallet-section{padding:16px 14px;border-bottom:1px solid var(--border)}
-.wallet-btn{width:100%;padding:10px 14px;background:linear-gradient(135deg,var(--accent)22,var(--accent2)11);border:1px solid var(--accent)66;border-radius:var(--sm-r);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all 0.2s}
-.wallet-btn:hover{border-color:var(--accent);background:linear-gradient(135deg,var(--accent)33,var(--accent2)22)}
+.wallet-section{padding:16px 14px;border-bottom:1px solid var(--border);flex-shrink:0}
+.wallet-btn{width:100%;padding:10px 14px;background:linear-gradient(135deg,var(--accent)22,var(--accent2)11);border:1px solid var(--accent)66;border-radius:10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all 0.2s}
+.wallet-btn:hover{border-color:var(--accent)}
 .wallet-btn.connected{border-color:var(--accent2)88;background:var(--accent2)11}
-.wallet-btn:disabled{opacity:0.6;cursor:not-allowed}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-.nav{padding:12px 8px;flex:1}
+.wallet-addr{margin-top:8px;padding:6px 10px;background:var(--bg3);border-radius:8px;font-family:'Space Mono',monospace;font-size:10px;color:var(--accent2);display:none;word-break:break-all}
+.nav{padding:12px 8px;flex:1;overflow-y:auto}
 .nav-label{font-size:10px;color:var(--text3);font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:8px 8px 6px}
-.nav-item{display:flex;align-items:center;gap:10px;padding:10px;border-radius:var(--sm-r);cursor:pointer;font-size:13px;color:var(--text2);transition:all 0.15s;margin-bottom:2px;border:1px solid transparent}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;cursor:pointer;font-size:13px;color:var(--text2);transition:all 0.15s;margin-bottom:2px;border:1px solid transparent}
 .nav-item:hover{background:var(--bg3);color:var(--text)}
 .nav-item.active{background:var(--accent)18;border-color:var(--accent)33;color:var(--accent);font-weight:500}
-.portfolio-mini{margin:0 8px 12px;padding:12px;background:var(--bg3);border-radius:var(--card-r);border:1px solid var(--border)}
+.sidebar-bottom{padding:0 8px 12px;flex-shrink:0}
+.portfolio-mini{padding:12px;background:var(--bg3);border-radius:16px;border:1px solid var(--border);margin-bottom:8px}
 .mini-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
 .mini-value{font-family:'Space Mono',monospace;font-size:20px;font-weight:700}
 .mini-change{font-size:12px;margin-top:2px;color:var(--text3)}
-.content-area{display:flex;flex-direction:column;overflow:hidden;height:100vh}
-.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;z-index:10}
+.builder-card{padding:10px 12px;background:linear-gradient(135deg,var(--accent)0a,var(--accent2)06);border:1px solid var(--accent)22;border-radius:12px}
+/* MAIN */
+.content{flex:1;display:flex;flex-direction:column;height:100vh;overflow:hidden}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .page-title{font-family:'Space Mono',monospace;font-size:16px;font-weight:700}
 .page-sub{font-size:13px;color:var(--text2);margin-top:2px}
-.topbar-actions{display:flex;gap:8px}
 .btn-sm{padding:8px 14px;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);transition:all 0.2s}
 .btn-sm:hover{background:var(--bg4);color:var(--text)}
 .btn-primary{background:linear-gradient(135deg,var(--accent),#7B2FE0);border-color:transparent;color:#fff}
-.btn-primary:hover{opacity:0.9}
-.main{background:var(--bg);flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0}
-
+.views{flex:1;overflow:hidden;position:relative}
 /* DASHBOARD */
-.dashboard{padding:24px 28px;display:none;flex-direction:column;gap:20px;overflow-y:auto;flex:1}
-.dashboard.active{display:flex}
-.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.metric-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-r);padding:18px;position:relative;overflow:hidden}
-.metric-card::before{content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;opacity:0.06}
-.metric-card.sol::before{background:var(--accent)}
-.metric-card.usdc::before{background:var(--accent3)}
-.metric-card.pnl::before{background:var(--accent2)}
-.metric-card.staked::before{background:var(--amber)}
+#dashView{position:absolute;inset:0;overflow-y:auto;padding:24px 28px;display:flex;flex-direction:column;gap:20px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.metric{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:18px}
 .metric-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
 .metric-val{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;margin-bottom:4px}
-.metric-change{font-size:12px;padding:3px 8px;border-radius:20px;display:inline-flex;align-items:center;gap:4px}
+.badge{font-size:12px;padding:3px 8px;border-radius:20px;display:inline-block}
 .up{background:var(--accent2)18;color:var(--accent2)}
-.down{background:var(--red)18;color:var(--red)}
 .neutral{background:var(--text3)22;color:var(--text2)}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-r);padding:20px}
-.section-title{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
-.token-row{display:flex;align-items:center;gap:12px;padding:10px;border-radius:10px;background:var(--bg3);margin-bottom:8px;transition:all 0.15s;cursor:pointer}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:20px}
+.card-title{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+.token-row{display:flex;align-items:center;gap:12px;padding:10px;border-radius:10px;background:var(--bg3);margin-bottom:8px;cursor:pointer;transition:background 0.15s}
 .token-row:hover{background:var(--bg4)}
 .token-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;font-family:'Space Mono',monospace;flex-shrink:0}
-.token-right{margin-left:auto;text-align:right}
-.token-amt{font-family:'Space Mono',monospace;font-size:13px;font-weight:600}
-.token-usd{font-size:11px;color:var(--text2)}
 .activity-row{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;background:var(--bg3);margin-bottom:6px}
-.activity-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.chart-bars{display:flex;align-items:flex-end;gap:6px;height:100px;margin-top:12px}
-.bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
-.bar{border-radius:4px 4px 0 0;width:100%;cursor:pointer;transition:opacity 0.2s}
-.bar:hover{opacity:0.75}
-.bar-label{font-size:9px;color:var(--text3)}
-
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.bars{display:flex;align-items:flex-end;gap:6px;height:90px;margin-top:12px}
+.bar-w{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bar{border-radius:4px 4px 0 0;width:100%}
+.bar-l{font-size:9px;color:var(--text3)}
 /* CHAT */
-.chat-view{display:none;flex-direction:column;flex:1;min-height:0}
-.chat-view.active{display:flex}
-.chat-messages{flex:1;overflow-y:auto;padding:24px 28px;display:flex;flex-direction:column;gap:16px;min-height:0}
-.chat-messages::-webkit-scrollbar{width:4px}
-.chat-messages::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+#chatView{position:absolute;inset:0;display:none;flex-direction:column}
+#chatView.show{display:flex}
+.chat-msgs{flex:1;overflow-y:auto;padding:24px 28px;display:flex;flex-direction:column;gap:16px}
+.chat-msgs::-webkit-scrollbar{width:4px}
+.chat-msgs::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
 .msg{display:flex;gap:12px;max-width:720px}
 .msg.user{align-self:flex-end;flex-direction:row-reverse}
-.avatar{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;font-family:'Space Mono',monospace}
-.avatar.ai{background:linear-gradient(135deg,var(--accent),#7B2FE0);color:#fff}
-.avatar.user{background:var(--bg3);border:1px solid var(--border2);color:var(--text2)}
-.bubble{padding:12px 16px;border-radius:14px;font-size:14px;line-height:1.6;max-width:580px}
-.bubble.ai{background:var(--bg2);border:1px solid var(--border);border-bottom-left-radius:4px}
-.bubble.user{background:linear-gradient(135deg,var(--accent)cc,#7B2FE0);color:#fff;border-bottom-right-radius:4px}
-.typing{display:flex;gap:5px;align-items:center;padding:4px 0}
-.typing span{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:bounce 1.4s infinite both}
+.av{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;font-family:'Space Mono',monospace}
+.av.ai{background:linear-gradient(135deg,var(--accent),#7B2FE0);color:#fff}
+.av.user{background:var(--bg3);border:1px solid var(--border2);color:var(--text2)}
+.bub{padding:12px 16px;border-radius:14px;font-size:14px;line-height:1.6;max-width:580px}
+.bub.ai{background:var(--bg2);border:1px solid var(--border);border-bottom-left-radius:4px}
+.bub.user{background:linear-gradient(135deg,var(--accent)cc,#7B2FE0);color:#fff;border-bottom-right-radius:4px}
+.typing span{width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block;animation:bounce 1.4s infinite both;margin:0 2px}
 .typing span:nth-child(2){animation-delay:0.2s}
 .typing span:nth-child(3){animation-delay:0.4s}
 @keyframes bounce{0%,80%,100%{transform:scale(0.6);opacity:0.4}40%{transform:scale(1);opacity:1}}
-.chat-input-area{padding:16px 28px 20px;border-top:1px solid var(--border);flex-shrink:0}
-.suggestions{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
-.sug{padding:7px 12px;border-radius:20px;font-size:12px;border:1px solid var(--border);background:var(--bg2);cursor:pointer;color:var(--text2);transition:all 0.15s;white-space:nowrap}
-.sug:hover{border-color:var(--accent)55;color:var(--accent);background:var(--accent)10}
-.input-wrap{display:flex;gap:10px;background:var(--bg2);border:1px solid var(--border2);border-radius:14px;padding:10px 14px;align-items:flex-end;transition:border-color 0.2s}
-.input-wrap:focus-within{border-color:var(--accent)66}
-.chat-input{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;resize:none;min-height:22px;max-height:120px;line-height:1.5}
-.chat-input::placeholder{color:var(--text3)}
-.send-btn{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7B2FE0);border:none;color:#fff;cursor:pointer;font-size:16px;flex-shrink:0;transition:opacity 0.2s}
-.send-btn:hover{opacity:0.85}
-.send-btn:disabled{opacity:0.4;cursor:not-allowed}
-.empty-chat{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;text-align:center}
+.chat-bottom{padding:16px 28px 20px;border-top:1px solid var(--border);flex-shrink:0;background:var(--bg)}
+.sugs{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.sug{padding:7px 13px;border-radius:20px;font-size:12px;border:1px solid var(--border);background:var(--bg2);cursor:pointer;color:var(--text2);transition:all 0.15s;white-space:nowrap}
+.sug:hover{border-color:var(--accent)55;color:var(--accent)}
+.input-row{display:flex;gap:10px;background:var(--bg2);border:1px solid var(--border2);border-radius:14px;padding:10px 14px;align-items:flex-end}
+.input-row:focus-within{border-color:var(--accent)66}
+.chat-in{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;resize:none;min-height:22px;max-height:100px;line-height:1.5}
+.chat-in::placeholder{color:var(--text3)}
+.send{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7B2FE0);border:none;color:#fff;cursor:pointer;font-size:15px;flex-shrink:0;transition:opacity 0.2s}
+.send:disabled{opacity:0.4;cursor:not-allowed}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;text-align:center;flex:1}
 .empty-icon{width:64px;height:64px;background:linear-gradient(135deg,var(--accent)22,var(--accent2)11);border:1px solid var(--accent)33;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 20px}
-.empty-title{font-family:'Space Mono',monospace;font-size:18px;font-weight:700;margin-bottom:8px}
-.empty-sub{font-size:14px;color:var(--text2);max-width:380px;line-height:1.6;margin-bottom:24px}
-.prompt-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:440px;width:100%}
-.prompt-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px;cursor:pointer;text-align:left;transition:all 0.2s}
-.prompt-card:hover{border-color:var(--accent)44;background:var(--accent)08}
-.prompt-card-icon{font-size:18px;margin-bottom:6px}
-.prompt-card-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
-.prompt-card-text{font-size:12px;color:var(--text2);line-height:1.5}
-
+.prompt-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:440px;width:100%;margin-top:20px}
+.pc{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px;cursor:pointer;text-align:left;transition:all 0.2s}
+.pc:hover{border-color:var(--accent)44;background:var(--accent)08}
 /* SWAP */
-.swap-wrap{padding:24px 28px;display:none;overflow-y:auto}
-.swap-wrap.active{display:block}
-.swap-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-r);padding:20px;max-width:420px}
-.swap-group{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.swap-label{font-size:11px;color:var(--text3);margin-bottom:6px}
-.swap-row{display:flex;align-items:center;gap:8px}
-.swap-amount{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;flex:1;background:transparent;border:none;outline:none;color:var(--text);width:100%}
-.swap-token-sel{padding:6px 10px;border-radius:8px;background:var(--bg4);border:1px solid var(--border2);font-size:13px;font-weight:600;color:var(--text);cursor:pointer;font-family:'Space Mono',monospace}
-.swap-arrow{text-align:center;color:var(--text3);font-size:20px;cursor:pointer;padding:4px;transition:transform 0.3s;display:block}
-.swap-arrow:hover{color:var(--accent);transform:rotate(180deg)}
-.swap-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--accent),#7B2FE0);border:none;border-radius:10px;color:#fff;font-size:15px;font-weight:600;cursor:pointer;margin-top:12px;font-family:'DM Sans',sans-serif;transition:opacity 0.2s}
-.swap-btn:hover{opacity:0.9}
-.swap-detail{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);padding:4px 0}
-
+#swapView{position:absolute;inset:0;overflow-y:auto;padding:24px 28px;display:none}
+#swapView.show{display:block}
+.swap-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:20px;max-width:420px}
+.sg{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:8px}
+.sl{font-size:11px;color:var(--text3);margin-bottom:6px}
+.sr{display:flex;align-items:center;gap:8px}
+.sa{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;flex:1;background:transparent;border:none;outline:none;color:var(--text);width:100%}
+.st{padding:6px 10px;border-radius:8px;background:var(--bg4);border:1px solid var(--border2);font-size:13px;font-weight:600;color:var(--text);cursor:pointer;font-family:'Space Mono',monospace}
+.action-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--accent),#7B2FE0);border:none;border-radius:10px;color:#fff;font-size:15px;font-weight:600;cursor:pointer;margin-top:12px;font-family:'DM Sans',sans-serif}
+.action-btn:hover{opacity:0.9}
+.action-btn.green{background:linear-gradient(135deg,var(--accent2),#0aa87a)}
 /* STAKE */
-.stake-wrap{padding:24px 28px;display:none;overflow-y:auto}
-.stake-wrap.active{display:block}
-.stake-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-r);padding:20px;max-width:500px}
-.validator-row{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;background:var(--bg3);border:1px solid transparent;margin-bottom:8px;cursor:pointer;transition:all 0.15s}
-.validator-row:hover,.validator-row.selected{border-color:var(--accent)55;background:var(--accent)0a}
-.val-apy{font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:var(--accent2);margin-left:auto}
-
-/* WALLET STATUS BANNER */
-.wallet-banner{margin:16px 28px 0;padding:12px 16px;background:var(--accent)0f;border:1px solid var(--accent)33;border-radius:10px;font-size:13px;color:var(--accent);display:none;align-items:center;gap:8px}
-.wallet-banner.show{display:flex}
-
+#stakeView{position:absolute;inset:0;overflow-y:auto;padding:24px 28px;display:none}
+#stakeView.show{display:block}
+.vrow{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;background:var(--bg3);border:1px solid transparent;margin-bottom:8px;cursor:pointer;transition:all 0.15s}
+.vrow:hover,.vrow.sel{border-color:var(--accent)55;background:var(--accent)0a}
 /* TOAST */
-.toast{position:fixed;bottom:24px;right:24px;background:var(--bg3);border:1px solid var(--border2);border-radius:12px;padding:12px 18px;font-size:13px;color:var(--text);z-index:999;transform:translateY(80px);opacity:0;transition:all 0.3s;max-width:320px;box-shadow:0 8px 32px #00000066}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--bg3);border:1px solid var(--border2);border-radius:12px;padding:12px 18px;font-size:13px;z-index:999;transform:translateY(80px);opacity:0;transition:all 0.3s;max-width:300px}
 .toast.show{transform:translateY(0);opacity:1}
-.toast.success{border-color:var(--accent2)55}
-.toast.error{border-color:var(--red)55}
-
-/* LOADING SPINNER */
-.spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
+.toast.ok{border-color:var(--accent2)55}
+.toast.err{border-color:var(--red)55}
 </style>
 </head>
 <body>
-<div class="app">
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="logo">
-      <div class="logo-icon">OC</div>
-      <div>
-        <div class="logo-text">OnChain Copilot</div>
-        <div class="logo-sub">Powered by Claude AI + Solana</div>
-      </div>
-    </div>
 
-    <div class="wallet-section">
-      <button class="wallet-btn" id="walletBtn" onclick="connectWallet()">
-        <span id="walletDot" style="width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0"></span>
-        <span id="walletText">Connect Phantom Wallet</span>
-      </button>
-      <div id="walletAddr" style="display:none;margin-top:8px;padding:6px 10px;background:var(--bg3);border-radius:8px;font-family:'Space Mono',monospace;font-size:10px;color:var(--accent2);word-break:break-all"></div>
+<aside class="sidebar">
+  <div class="logo">
+    <div class="logo-icon">OC</div>
+    <div>
+      <div class="logo-text">OnChain Copilot</div>
+      <div class="logo-sub">Claude AI + Solana</div>
     </div>
-
-    <div class="nav">
-      <div class="nav-label">Navigation</div>
-      <div class="nav-item active" id="nav-dashboard" onclick="switchView('dashboard')">
-        <span>📊</span> Dashboard
-      </div>
-      <div class="nav-item" id="nav-chat" onclick="switchView('chat')">
-        <span>🤖</span> AI Copilot
-      </div>
-      <div class="nav-item" id="nav-swap" onclick="switchView('swap')">
-        <span>🔄</span> Swap
-      </div>
-      <div class="nav-item" id="nav-stake" onclick="switchView('stake')">
-        <span>🔒</span> Stake SOL
-      </div>
-    </div>
-
+  </div>
+  <div class="wallet-section">
+    <button class="wallet-btn" id="wBtn" onclick="connectWallet()">
+      <span id="wDot" style="width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0"></span>
+      <span id="wTxt">Connect Phantom Wallet</span>
+    </button>
+    <div class="wallet-addr" id="wAddr"></div>
+  </div>
+  <div class="nav">
+    <div class="nav-label">Navigation</div>
+    <div class="nav-item active" id="n0" onclick="go('dash')">📊 Dashboard</div>
+    <div class="nav-item" id="n1" onclick="go('chat')">🤖 AI Copilot</div>
+    <div class="nav-item" id="n2" onclick="go('swap')">🔄 Swap</div>
+    <div class="nav-item" id="n3" onclick="go('stake')">🔒 Stake SOL</div>
+  </div>
+  <div class="sidebar-bottom">
     <div class="portfolio-mini">
       <div class="mini-label">Total Portfolio</div>
-      <div class="mini-value" id="miniVal">$0.00</div>
-      <div class="mini-change" id="miniChange">Connect wallet to load</div>
+      <div class="mini-value" id="mVal">$0.00</div>
+      <div class="mini-change" id="mChg">Connect wallet to load</div>
     </div>
-
-    <div style="margin:0 8px 16px;padding:10px 12px;background:linear-gradient(135deg,var(--accent)0a,var(--accent2)06);border:1px solid var(--accent)22;border-radius:12px">
+    <div class="builder-card">
       <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Built by</div>
-      <div style="font-size:12px;font-weight:600;color:var(--text);line-height:1.4">Sameer Hassan</div>
-      <div style="font-size:10px;color:var(--accent2);margin-top:2px;line-height:1.4">UMT Lahore</div>
-      <div style="font-size:9px;color:var(--text3);margin-top:1px;line-height:1.4">University of Management and Technology</div>
+      <div style="font-size:12px;font-weight:600;color:var(--text)">Sameer Hassan</div>
+      <div style="font-size:10px;color:var(--accent2);margin-top:2px">UMT Lahore</div>
+      <div style="font-size:9px;color:var(--text3);margin-top:1px">University of Management and Technology</div>
       <div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border);font-size:9px;color:var(--text3)">Colosseum Frontier Hackathon 2025</div>
     </div>
-  </aside>
+  </div>
+</aside>
 
-  <!-- CONTENT -->
-  <div class="content-area">
-    <header class="topbar">
-      <div>
-        <div class="page-title" id="pageTitle">Dashboard</div>
-        <div class="page-sub" id="pageSub">Your Solana portfolio overview</div>
-      </div>
-      <div class="topbar-actions">
-        <button class="btn-sm" onclick="refreshPortfolio()">↺ Refresh</button>
-        <button class="btn-sm btn-primary" onclick="switchView('chat')">Ask AI ✦</button>
-      </div>
-    </header>
+<div class="content">
+  <header class="topbar">
+    <div>
+      <div class="page-title" id="pTitle">Dashboard</div>
+      <div class="page-sub" id="pSub">Your live Solana portfolio</div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn-sm" onclick="refreshWallet()">↺ Refresh</button>
+      <button class="btn-sm btn-primary" onclick="go('chat')">Ask AI ✦</button>
+    </div>
+  </header>
 
-    <main class="main">
-      <!-- WALLET BANNER -->
-      <div class="wallet-banner" id="walletBanner">
-        <span class="spinner"></span>
-        <span id="walletBannerText">Fetching your wallet data from Solana...</span>
-      </div>
-
-      <!-- DASHBOARD -->
-      <div class="dashboard active" id="dashboardView">
-        <div class="metrics-grid">
-          <div class="metric-card sol">
-            <div class="metric-label">SOL Balance</div>
-            <div class="metric-val" id="solBal">—</div>
-            <div class="metric-change neutral" id="solUsd">Connect wallet</div>
-          </div>
-          <div class="metric-card usdc">
-            <div class="metric-label">USDC Balance</div>
-            <div class="metric-val" id="usdcBal">—</div>
-            <div class="metric-change neutral">Stablecoin</div>
-          </div>
-          <div class="metric-card pnl">
-            <div class="metric-label">Portfolio Value</div>
-            <div class="metric-val" id="totalVal">—</div>
-            <div class="metric-change neutral" id="totalChange">Total USD</div>
-          </div>
-          <div class="metric-card staked">
-            <div class="metric-label">Network</div>
-            <div class="metric-val" style="font-size:14px">Solana</div>
-            <div class="metric-change up">~7.2% APY</div>
-          </div>
+  <div class="views">
+    <!-- DASHBOARD -->
+    <div id="dashView">
+      <div class="metrics">
+        <div class="metric">
+          <div class="metric-label">SOL Balance</div>
+          <div class="metric-val" id="dSol">—</div>
+          <div class="badge neutral" id="dSolU">Connect wallet</div>
         </div>
-        <div class="two-col">
-          <div class="card">
-            <div class="section-title">Token Holdings</div>
-            <div id="tokenList"><div style="color:var(--text3);font-size:13px;text-align:center;padding:24px">Connect wallet to see holdings</div></div>
-          </div>
-          <div class="card">
-            <div class="section-title">Portfolio Trend (simulated)</div>
-            <div class="chart-bars" id="chartBars"><div style="color:var(--text3);font-size:13px;text-align:center;width:100%">Connect wallet</div></div>
-          </div>
+        <div class="metric">
+          <div class="metric-label">USDC Balance</div>
+          <div class="metric-val" id="dUsdc">—</div>
+          <div class="badge neutral">Stablecoin</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Total Value</div>
+          <div class="metric-val" id="dTotal">—</div>
+          <div class="badge neutral" id="dTotalB">USD</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Network</div>
+          <div class="metric-val" style="font-size:15px">Solana</div>
+          <div class="badge up">~7.2% APY</div>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">Token Holdings</div>
+          <div id="tokens"><div style="color:var(--text3);font-size:13px;padding:20px 0;text-align:center">Connect wallet</div></div>
         </div>
         <div class="card">
-          <div class="section-title">Recent Transactions</div>
-          <div id="activityList"><div style="color:var(--text3);font-size:13px;text-align:center;padding:20px">Connect wallet to see transactions</div></div>
+          <div class="card-title">7-Day Trend</div>
+          <div class="bars" id="chartEl"><div style="color:var(--text3);font-size:13px;width:100%;text-align:center">Connect wallet</div></div>
         </div>
       </div>
+      <div class="card">
+        <div class="card-title">Recent Activity</div>
+        <div id="activity"><div style="color:var(--text3);font-size:13px;padding:16px 0;text-align:center">Connect wallet to see transactions</div></div>
+      </div>
+    </div>
 
-      <!-- CHAT -->
-      <div class="chat-view" id="chatView">
-        <div class="chat-messages" id="chatMessages">
-          <div class="empty-chat" id="emptyState">
-            <div class="empty-icon">✦</div>
-            <div class="empty-title">OnChain Copilot</div>
-            <div class="empty-sub">Your AI-powered Solana wallet assistant. Connect your Phantom wallet then ask me anything about DeFi, staking, swaps, or your portfolio.</div>
-            <div class="prompt-grid">
-              <div class="prompt-card" onclick="sendQuick('Analyze my portfolio and suggest the best yield strategy for my SOL holdings')">
-                <div class="prompt-card-icon">📈</div>
-                <div class="prompt-card-title">Portfolio Analysis</div>
-                <div class="prompt-card-text">Optimize my holdings for max yield</div>
-              </div>
-              <div class="prompt-card" onclick="sendQuick('Compare Jito vs Marinade liquid staking. Which gives better returns and why?')">
-                <div class="prompt-card-icon">🔒</div>
-                <div class="prompt-card-title">Staking Guide</div>
-                <div class="prompt-card-text">Find the best validators and APY</div>
-              </div>
-              <div class="prompt-card" onclick="sendQuick('What DeFi risks should I know before using Solana protocols like Raydium or Orca?')">
-                <div class="prompt-card-icon">🛡️</div>
-                <div class="prompt-card-title">DeFi Risk Audit</div>
-                <div class="prompt-card-text">Understand smart contract risks</div>
-              </div>
-              <div class="prompt-card" onclick="sendQuick('I want to swap 100 USDC to SOL. Walk me through the best route, slippage, and expected output using Jupiter')">
-                <div class="prompt-card-icon">🔄</div>
-                <div class="prompt-card-title">Swap Assistant</div>
-                <div class="prompt-card-text">Find the best swap route</div>
-              </div>
+    <!-- CHAT -->
+    <div id="chatView">
+      <div class="chat-msgs" id="chatMsgs">
+        <div class="empty" id="emptyEl">
+          <div class="empty-icon">✦</div>
+          <div style="font-family:'Space Mono',monospace;font-size:18px;font-weight:700;margin-bottom:8px">OnChain Copilot</div>
+          <div style="font-size:14px;color:var(--text2);max-width:360px;line-height:1.6">Your AI-powered Solana assistant. Connect wallet then ask me anything about DeFi, staking, or swaps.</div>
+          <div class="prompt-grid">
+            <div class="pc" onclick="sq('Analyze my portfolio and suggest the best yield strategy for my SOL')">
+              <div style="font-size:18px;margin-bottom:6px">📈</div>
+              <div style="font-size:13px;font-weight:600;margin-bottom:3px">Portfolio Analysis</div>
+              <div style="font-size:12px;color:var(--text2)">Optimize for max yield</div>
+            </div>
+            <div class="pc" onclick="sq('Compare Jito vs Marinade liquid staking. Which gives better returns?')">
+              <div style="font-size:18px;margin-bottom:6px">🔒</div>
+              <div style="font-size:13px;font-weight:600;margin-bottom:3px">Staking Guide</div>
+              <div style="font-size:12px;color:var(--text2)">Best validators and APY</div>
+            </div>
+            <div class="pc" onclick="sq('What DeFi risks should I know before using Solana protocols?')">
+              <div style="font-size:18px;margin-bottom:6px">🛡️</div>
+              <div style="font-size:13px;font-weight:600;margin-bottom:3px">DeFi Risk Audit</div>
+              <div style="font-size:12px;color:var(--text2)">Understand smart contract risks</div>
+            </div>
+            <div class="pc" onclick="sq('I want to swap 100 USDC to SOL. Best route and expected output on Jupiter?')">
+              <div style="font-size:18px;margin-bottom:6px">🔄</div>
+              <div style="font-size:13px;font-weight:600;margin-bottom:3px">Swap Assistant</div>
+              <div style="font-size:12px;color:var(--text2)">Best swap route and slippage</div>
             </div>
           </div>
         </div>
-        <div class="chat-input-area">
-          <div class="suggestions">
-            <div class="sug" onclick="sendQuick('What is my portfolio worth right now?')">💼 Portfolio value</div>
-            <div class="sug" onclick="sendQuick('Should I stake my SOL or provide liquidity on Raydium?')">🤔 Stake vs LP</div>
-            <div class="sug" onclick="sendQuick('Explain impermanent loss in simple terms')">📚 Impermanent loss</div>
-            <div class="sug" onclick="sendQuick('What are the top Solana DeFi protocols right now?')">🏆 Top protocols</div>
-          </div>
-          <div class="input-wrap">
-            <textarea class="chat-input" id="chatInput" placeholder="Ask about your portfolio, DeFi strategies, staking, swaps..." rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
-            <button class="send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
-          </div>
+      </div>
+      <div class="chat-bottom">
+        <div class="sugs">
+          <div class="sug" onclick="sq('What is my portfolio worth right now?')">💼 Portfolio value</div>
+          <div class="sug" onclick="sq('Should I stake SOL or provide liquidity on Raydium?')">🤔 Stake vs LP</div>
+          <div class="sug" onclick="sq('Explain impermanent loss in simple terms')">📚 Impermanent loss</div>
+          <div class="sug" onclick="sq('What are the top Solana DeFi protocols?')">🏆 Top protocols</div>
+        </div>
+        <div class="input-row">
+          <textarea class="chat-in" id="chatIn" placeholder="Ask about DeFi, staking, your portfolio..." rows="1" onkeydown="onKey(event)" oninput="resize(this)"></textarea>
+          <button class="send" id="sendBtn" onclick="send()">➤</button>
         </div>
       </div>
+    </div>
 
-      <!-- SWAP -->
-      <div class="swap-wrap" id="swapView">
-        <div style="max-width:460px">
-          <p style="font-size:14px;color:var(--text2);margin-bottom:16px">Swap tokens via Jupiter aggregator — best route across all Solana DEXes.</p>
-          <div class="swap-card">
-            <div class="swap-group">
-              <div class="swap-label">You Pay</div>
-              <div class="swap-row">
-                <input class="swap-amount" id="swapFromAmt" type="number" value="100" oninput="calcSwap()"/>
-                <select class="swap-token-sel" id="swapFrom" onchange="calcSwap()" style="background:var(--bg4);color:var(--text)">
-                  <option value="USDC" selected>USDC</option>
-                  <option value="SOL">SOL</option>
-                  <option value="JUP">JUP</option>
-                  <option value="RAY">RAY</option>
-                </select>
-              </div>
-              <div style="font-size:11px;color:var(--text3);margin-top:6px">Balance: <span id="swapFromBal">—</span></div>
+    <!-- SWAP -->
+    <div id="swapView">
+      <div style="max-width:440px">
+        <p style="font-size:14px;color:var(--text2);margin-bottom:16px">Swap tokens via Jupiter — best route across all Solana DEXes.</p>
+        <div class="swap-card">
+          <div class="sg">
+            <div class="sl">You Pay</div>
+            <div class="sr">
+              <input class="sa" id="sfAmt" type="number" value="100" oninput="calcSwap()"/>
+              <select class="st" id="sfTok" onchange="calcSwap()" style="background:var(--bg4);color:var(--text)">
+                <option value="USDC" selected>USDC</option>
+                <option value="SOL">SOL</option>
+                <option value="JUP">JUP</option>
+                <option value="RAY">RAY</option>
+              </select>
             </div>
-            <span class="swap-arrow" onclick="flipSwap()">⇅</span>
-            <div class="swap-group">
-              <div class="swap-label">You Receive (estimated)</div>
-              <div class="swap-row">
-                <div id="swapToAmt" style="font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--text2);flex:1">—</div>
-                <select class="swap-token-sel" id="swapTo" onchange="calcSwap()" style="background:var(--bg4);color:var(--text)">
-                  <option value="SOL" selected>SOL</option>
-                  <option value="USDC">USDC</option>
-                  <option value="JUP">JUP</option>
-                  <option value="RAY">RAY</option>
-                </select>
-              </div>
-            </div>
-            <div style="margin-top:12px;padding:10px;background:var(--bg3);border-radius:8px">
-              <div class="swap-detail"><span>Rate</span><span id="swapRate" style="font-family:'Space Mono',monospace">—</span></div>
-              <div class="swap-detail"><span>Price Impact</span><span style="color:var(--accent2)">less than 0.1%</span></div>
-              <div class="swap-detail"><span>Network Fee</span><span>~0.000005 SOL</span></div>
-              <div class="swap-detail"><span>Route</span><span style="color:var(--text2)">Jupiter Aggregator ✓</span></div>
-            </div>
-            <button class="swap-btn" onclick="doSwap()">🔄 Preview Swap</button>
+            <div style="font-size:11px;color:var(--text3);margin-top:6px">Balance: <span id="sfBal">—</span></div>
           </div>
-          <div style="margin-top:14px;padding:12px 14px;background:var(--accent2)08;border:1px solid var(--accent2)22;border-radius:10px;font-size:12px;color:var(--text2);line-height:1.6">
-            <strong style="color:var(--accent2)">✦ AI Tip:</strong> Jupiter routes through Raydium, Orca, Meteora and 20+ DEXes to find the best price. For swaps over $1,000, set slippage to 0.5% to avoid failed transactions.
+          <div style="text-align:center;font-size:20px;color:var(--text3);cursor:pointer;padding:4px" onclick="flipSwap()">⇅</div>
+          <div class="sg">
+            <div class="sl">You Receive (estimated)</div>
+            <div class="sr">
+              <div id="stAmt" style="font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--text2);flex:1">—</div>
+              <select class="st" id="stTok" onchange="calcSwap()" style="background:var(--bg4);color:var(--text)">
+                <option value="SOL" selected>SOL</option>
+                <option value="USDC">USDC</option>
+                <option value="JUP">JUP</option>
+                <option value="RAY">RAY</option>
+              </select>
+            </div>
           </div>
+          <div style="margin-top:12px;padding:10px;background:var(--bg3);border-radius:8px;font-size:11px;color:var(--text3)">
+            <div style="display:flex;justify-content:space-between;padding:3px 0"><span>Rate</span><span id="swapRate" style="font-family:'Space Mono',monospace">—</span></div>
+            <div style="display:flex;justify-content:space-between;padding:3px 0"><span>Price Impact</span><span style="color:var(--accent2)">less than 0.1%</span></div>
+            <div style="display:flex;justify-content:space-between;padding:3px 0"><span>Fee</span><span>~0.000005 SOL</span></div>
+            <div style="display:flex;justify-content:space-between;padding:3px 0"><span>Route</span><span style="color:var(--text2)">Jupiter ✓</span></div>
+          </div>
+          <button class="action-btn" onclick="doSwap()">🔄 Open in Jupiter</button>
+        </div>
+        <div style="margin-top:14px;padding:12px;background:var(--accent2)08;border:1px solid var(--accent2)22;border-radius:10px;font-size:12px;color:var(--text2);line-height:1.6">
+          <strong style="color:var(--accent2)">✦ AI Tip:</strong> Jupiter routes through Raydium, Orca, and Meteora for best price. Set slippage to 0.5% for swaps over $1,000.
         </div>
       </div>
+    </div>
 
-      <!-- STAKE -->
-      <div class="stake-wrap" id="stakeView">
-        <div style="max-width:520px">
-          <p style="font-size:14px;color:var(--text2);margin-bottom:16px">Stake SOL with top validators and earn up to 7.8% APY.</p>
-          <div class="stake-card">
-            <div class="section-title">Choose Validator</div>
-            <div id="validatorList"></div>
-            <div style="margin-top:14px;padding:14px;background:var(--bg3);border-radius:10px">
-              <div class="swap-label">Amount to Stake</div>
-              <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
-                <input type="number" value="1" id="stakeAmt" oninput="updateEarnings()" style="font-family:'Space Mono',monospace;font-size:18px;background:transparent;border:none;outline:none;color:var(--text);flex:1"/>
-                <span style="font-family:'Space Mono',monospace;font-size:14px;color:var(--text2)">SOL</span>
-              </div>
-              <div style="font-size:12px;color:var(--text3);margin-top:8px">
-                Estimated yearly earnings: <span id="stakeEarnings" style="color:var(--accent2);font-family:'Space Mono',monospace">—</span> SOL
-              </div>
+    <!-- STAKE -->
+    <div id="stakeView">
+      <div style="max-width:500px">
+        <p style="font-size:14px;color:var(--text2);margin-bottom:16px">Stake SOL with top validators and earn up to 7.8% APY.</p>
+        <div class="card">
+          <div class="card-title">Choose Validator</div>
+          <div id="valList"></div>
+          <div style="margin-top:14px;padding:14px;background:var(--bg3);border-radius:10px">
+            <div class="sl">Amount to Stake</div>
+            <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
+              <input type="number" value="1" id="stakeAmt" oninput="updEarnings()" style="font-family:'Space Mono',monospace;font-size:18px;background:transparent;border:none;outline:none;color:var(--text);flex:1"/>
+              <span style="font-family:'Space Mono',monospace;font-size:14px;color:var(--text2)">SOL</span>
             </div>
-            <button class="swap-btn" style="background:linear-gradient(135deg,var(--accent2),#0aa87a)" onclick="doStake()">🔒 Stake SOL</button>
+            <div style="font-size:12px;color:var(--text3);margin-top:8px">Yearly earnings: <span id="earnings" style="color:var(--accent2);font-family:'Space Mono',monospace">—</span> SOL</div>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
-            <div style="padding:14px;background:var(--bg2);border:1px solid var(--border);border-radius:12px">
-              <div style="font-size:10px;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Native Staking</div>
-              <div style="font-size:13px;font-weight:500">2-3 day cooldown</div>
-              <div style="font-size:11px;color:var(--text2);margin-top:4px;line-height:1.5">Full validator control, supports decentralization</div>
-            </div>
-            <div style="padding:14px;background:var(--bg2);border:1px solid var(--accent2)33;border-radius:12px">
-              <div style="font-size:10px;color:var(--accent2);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Liquid Staking ✦</div>
-              <div style="font-size:13px;font-weight:500">Instant unstake</div>
-              <div style="font-size:11px;color:var(--text2);margin-top:4px;line-height:1.5">Get mSOL or jitoSOL — use in DeFi while earning</div>
-            </div>
+          <button class="action-btn green" onclick="doStake()">🔒 Stake SOL</button>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
+          <div style="padding:14px;background:var(--bg2);border:1px solid var(--border);border-radius:12px">
+            <div style="font-size:10px;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Native Staking</div>
+            <div style="font-size:13px;font-weight:500">2-3 day cooldown</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:4px;line-height:1.5">Full validator control, supports decentralization</div>
+          </div>
+          <div style="padding:14px;background:var(--bg2);border:1px solid var(--accent2)33;border-radius:12px">
+            <div style="font-size:10px;color:var(--accent2);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Liquid Staking ✦</div>
+            <div style="font-size:13px;font-weight:500">Instant unstake</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:4px;line-height:1.5">Get mSOL or jitoSOL — use in DeFi while earning</div>
           </div>
         </div>
       </div>
-    </main>
+    </div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ─── CONFIG ───────────────────────────────────────────────
-// When deployed to Vercel this calls /api/chat
-// When running locally from file://, it calls the Vercel deployment URL
-const API_URL = window.location.hostname === 'localhost' || window.location.protocol === 'file:'
-  ? 'https://onchain-copilot.vercel.app/api/chat'
-  : '/api/chat';
-
-const SOL_PRICE = 145.32;
-const PRICES = { SOL: SOL_PRICE, USDC: 1, JUP: 0.68, RAY: 2.41 };
-
-// ─── STATE ────────────────────────────────────────────────
-let walletConnected = false;
-let walletAddress = '';
-let walletData = null;
-let chatHistory = [];
-let isLoading = false;
-let selectedValidator = 0;
-
-const VALIDATORS = [
-  { name: 'Jito', commission: '8%', apy: '7.8%', stake: '12.4M SOL', icon: '🟢', desc: 'MEV rewards + liquid jitoSOL' },
-  { name: 'Marinade', commission: '6%', apy: '7.2%', stake: '8.1M SOL', icon: '🟣', desc: 'Largest liquid staking, get mSOL' },
-  { name: 'Lido', commission: '10%', apy: '6.9%', stake: '6.7M SOL', icon: '🔵', desc: 'Trusted, get stSOL token' },
-  { name: 'GenesysGo', commission: '5%', apy: '7.4%', stake: '3.2M SOL', icon: '⚪', desc: 'Low commission, reliable uptime' },
+const PRICES={SOL:145.32,USDC:1,JUP:0.68,RAY:2.41};
+const VALS=[
+  {name:'Jito',apy:'7.8%',commission:'8%',stake:'12.4M SOL',icon:'🟢',desc:'MEV rewards + liquid jitoSOL'},
+  {name:'Marinade',apy:'7.2%',commission:'6%',stake:'8.1M SOL',icon:'🟣',desc:'Largest liquid staking, get mSOL'},
+  {name:'Lido',apy:'6.9%',commission:'10%',stake:'6.7M SOL',icon:'🔵',desc:'Trusted protocol, get stSOL'},
+  {name:'GenesysGo',apy:'7.4%',commission:'5%',stake:'3.2M SOL',icon:'⚪',desc:'Low commission, high uptime'},
 ];
+let selVal=0,wallet=null,wAddr='',chatHist=[],busy=false,wData=null;
 
-// ─── PHANTOM WALLET ───────────────────────────────────────
-async function connectWallet() {
-  const btn = document.getElementById('walletBtn');
-
-  if (walletConnected) {
-    disconnectWallet();
+// ── WALLET ──────────────────────────────────────────────
+async function connectWallet(){
+  if(wallet){disconnect();return;}
+  if(!window.solana?.isPhantom){
+    toast('Phantom not found — opening download page','err');
+    setTimeout(()=>window.open('https://phantom.app/','_blank'),1500);
     return;
   }
-
-  // Check if Phantom is installed
-  if (!window.solana || !window.solana.isPhantom) {
-    showToast('Phantom wallet not found. Opening download page...', 'error');
-    setTimeout(() => window.open('https://phantom.app/', '_blank'), 1500);
-    return;
-  }
-
-  try {
-    btn.disabled = true;
-    document.getElementById('walletText').textContent = 'Connecting...';
-
-    const resp = await window.solana.connect();
-    walletAddress = resp.publicKey.toString();
-    walletConnected = true;
-
-    // Update UI
-    document.getElementById('walletBtn').className = 'wallet-btn connected';
-    document.getElementById('walletDot').style.cssText = 'width:7px;height:7px;border-radius:50%;background:var(--accent2);animation:pulse 2s infinite;flex-shrink:0';
-    document.getElementById('walletText').textContent = 'Phantom Connected';
-    document.getElementById('walletAddr').style.display = 'block';
-    document.getElementById('walletAddr').textContent = walletAddress.slice(0,4) + '...' + walletAddress.slice(-4);
-    btn.disabled = false;
-
-    showToast('✓ Phantom wallet connected!', 'success');
-    await fetchWalletData();
-
-  } catch (err) {
-    btn.disabled = false;
-    document.getElementById('walletText').textContent = 'Connect Phantom Wallet';
-    if (err.code === 4001) {
-      showToast('Connection cancelled by user', '');
-    } else {
-      showToast('Connection failed: ' + err.message, 'error');
-    }
+  try{
+    document.getElementById('wTxt').textContent='Connecting...';
+    const r=await window.solana.connect();
+    wAddr=r.publicKey.toString();wallet=window.solana;
+    document.getElementById('wBtn').className='wallet-btn connected';
+    document.getElementById('wDot').style.cssText='width:7px;height:7px;border-radius:50%;background:var(--accent2);animation:pulse 2s infinite;flex-shrink:0';
+    document.getElementById('wTxt').textContent='Phantom Connected';
+    const wa=document.getElementById('wAddr');
+    wa.textContent=wAddr.slice(0,6)+'...'+wAddr.slice(-4);
+    wa.style.display='block';
+    toast('✓ Wallet connected!','ok');
+    await loadWallet();
+  }catch(e){
+    document.getElementById('wTxt').textContent='Connect Phantom Wallet';
+    if(e.code!==4001)toast('Error: '+e.message,'err');
   }
 }
-
-function disconnectWallet() {
-  if (window.solana) window.solana.disconnect();
-  walletConnected = false;
-  walletAddress = '';
-  walletData = null;
-  document.getElementById('walletBtn').className = 'wallet-btn';
-  document.getElementById('walletDot').style.cssText = 'width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0';
-  document.getElementById('walletText').textContent = 'Connect Phantom Wallet';
-  document.getElementById('walletAddr').style.display = 'none';
-  resetDashboard();
-  showToast('Wallet disconnected', '');
+function disconnect(){
+  window.solana?.disconnect();
+  wallet=null;wAddr='';wData=null;
+  document.getElementById('wBtn').className='wallet-btn';
+  document.getElementById('wDot').style.cssText='width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0';
+  document.getElementById('wTxt').textContent='Connect Phantom Wallet';
+  document.getElementById('wAddr').style.display='none';
+  document.getElementById('mVal').textContent='$0.00';
+  document.getElementById('mChg').textContent='Connect wallet to load';
+  document.getElementById('mChg').style.color='var(--text3)';
+  ['dSol','dUsdc','dTotal'].forEach(id=>document.getElementById(id).textContent='—');
+  document.getElementById('tokens').innerHTML='<div style="color:var(--text3);font-size:13px;padding:20px 0;text-align:center">Connect wallet</div>';
+  document.getElementById('chartEl').innerHTML='<div style="color:var(--text3);font-size:13px;width:100%;text-align:center">Connect wallet</div>';
+  document.getElementById('activity').innerHTML='<div style="color:var(--text3);font-size:13px;padding:16px 0;text-align:center">Connect wallet to see transactions</div>';
+  toast('Wallet disconnected','');
 }
 
-// ─── FETCH WALLET DATA (Helius RPC) ───────────────────────
-async function fetchWalletData() {
-  showBanner('Fetching your wallet data from Solana mainnet...');
-
-  try {
-    // Use Helius public RPC — replace with your own key for production
-    const RPC = 'https://api.mainnet-beta.solana.com';
-
-    // Fetch SOL balance
-    const solResp = await fetch(RPC, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        jsonrpc: '2.0', id: 1, method: 'getBalance',
-        params: [walletAddress]
-      })
+async function loadWallet(){
+  try{
+    const RPC='https://api.mainnet-beta.solana.com';
+    const sr=await fetch(RPC,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({jsonrpc:'2.0',id:1,method:'getBalance',params:[wAddr]})});
+    const sd=await sr.json();
+    const sol=(sd.result?.value||0)/1e9;
+    const tr=await fetch(RPC,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({jsonrpc:'2.0',id:2,method:'getTokenAccountsByOwner',
+        params:[wAddr,{programId:'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA'},{encoding:'jsonParsed'}]})});
+    const td=await tr.json();
+    const USDC='EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
+    let usdc=0;
+    (td.result?.value||[]).forEach(a=>{
+      const info=a.account.data.parsed?.info;
+      if(info?.mint===USDC)usdc=parseFloat(info.tokenAmount?.uiAmount||0);
     });
-    const solData = await solResp.json();
-    const solBalance = (solData.result?.value || 0) / 1e9;
-
-    // Fetch token accounts
-    const tokenResp = await fetch(RPC, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        jsonrpc: '2.0', id: 2, method: 'getTokenAccountsByOwner',
-        params: [walletAddress, { programId: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA' },
-          { encoding: 'jsonParsed' }]
-      })
-    });
-    const tokenData = await tokenResp.json();
-
-    // Parse tokens
-    const USDC_MINT = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
-    let usdcBalance = 0;
-    const otherTokens = [];
-
-    (tokenData.result?.value || []).forEach(acc => {
-      const info = acc.account.data.parsed?.info;
-      if (!info) return;
-      const mint = info.mint;
-      const amount = parseFloat(info.tokenAmount?.uiAmount || 0);
-      if (amount <= 0) return;
-      if (mint === USDC_MINT) {
-        usdcBalance = amount;
-      } else {
-        otherTokens.push({ mint, amount });
-      }
-    });
-
-    walletData = { sol: solBalance, usdc: usdcBalance, tokens: otherTokens };
-    hideBanner();
-    renderDashboard(walletData);
-
-  } catch (err) {
-    hideBanner();
-    // Fallback to demo data if RPC fails
-    walletData = { sol: 4.82, usdc: 120.5, tokens: [], demo: true };
-    renderDashboard(walletData);
-    showToast('RPC rate limited — showing estimated data', '');
+    wData={sol,usdc};
+    renderDash(sol,usdc);
+  }catch(e){
+    wData={sol:4.82,usdc:120.5,demo:true};
+    renderDash(4.82,120.5);
+    toast('Using estimated data (RPC rate limited)','');
   }
 }
 
-function renderDashboard(data) {
-  const totalUSD = (data.sol * SOL_PRICE) + data.usdc;
-
-  document.getElementById('solBal').textContent = data.sol.toFixed(4) + ' SOL';
-  document.getElementById('solUsd').className = 'metric-change up';
-  document.getElementById('solUsd').textContent = '≈ $' + (data.sol * SOL_PRICE).toFixed(2);
-  document.getElementById('usdcBal').textContent = '$' + data.usdc.toFixed(2);
-  document.getElementById('totalVal').textContent = '$' + totalUSD.toFixed(2);
-  document.getElementById('totalChange').className = 'metric-change up';
-  document.getElementById('totalChange').textContent = 'Live balance';
-  document.getElementById('miniVal').textContent = '$' + totalUSD.toFixed(2);
-  document.getElementById('miniChange').textContent = '↑ Updated just now';
-  document.getElementById('miniChange').style.color = 'var(--accent2)';
-
-  // Token list
-  const tokens = [
-    { sym: 'SOL', name: 'Solana', amount: data.sol, color: '#9945FF', bg: '#9945FF22', price: SOL_PRICE },
-    { sym: 'USDC', name: 'USD Coin', amount: data.usdc, color: '#2775CA', bg: '#2775CA22', price: 1 },
-  ];
-
-  document.getElementById('tokenList').innerHTML = tokens.map(t => `
-    <div class="token-row">
-      <div class="token-icon" style="background:${t.bg};color:${t.color}">${t.sym.slice(0,3)}</div>
-      <div>
-        <div style="font-size:13px;font-weight:500">${t.name}</div>
-        <div style="font-size:11px;color:var(--text2)">$${t.price.toFixed(2)}</div>
-      </div>
-      <div class="token-right">
-        <div class="token-amt">${t.amount.toFixed(4)}</div>
-        <div class="token-usd">$${(t.amount * t.price).toFixed(2)}</div>
-      </div>
+function renderDash(sol,usdc){
+  const total=(sol*PRICES.SOL)+usdc;
+  document.getElementById('dSol').textContent=sol.toFixed(4)+' SOL';
+  document.getElementById('dSolU').className='badge up';
+  document.getElementById('dSolU').textContent='≈ $'+(sol*PRICES.SOL).toFixed(2);
+  document.getElementById('dUsdc').textContent='$'+usdc.toFixed(2);
+  document.getElementById('dTotal').textContent='$'+total.toFixed(2);
+  document.getElementById('dTotalB').className='badge up';
+  document.getElementById('dTotalB').textContent='Live balance';
+  document.getElementById('mVal').textContent='$'+total.toFixed(2);
+  document.getElementById('mChg').textContent='↑ Updated just now';
+  document.getElementById('mChg').style.color='var(--accent2)';
+  document.getElementById('tokens').innerHTML=[
+    {sym:'SOL',name:'Solana',amt:sol,color:'#9945FF',bg:'#9945FF22',p:PRICES.SOL},
+    {sym:'USDC',name:'USD Coin',amt:usdc,color:'#2775CA',bg:'#2775CA22',p:1},
+  ].map(t=>`<div class="token-row">
+    <div class="token-icon" style="background:${t.bg};color:${t.color}">${t.sym.slice(0,3)}</div>
+    <div><div style="font-size:13px;font-weight:500">${t.name}</div><div style="font-size:11px;color:var(--text2)">$${t.p.toFixed(2)}</div></div>
+    <div style="margin-left:auto;text-align:right">
+      <div style="font-family:'Space Mono',monospace;font-size:13px;font-weight:600">${t.amt.toFixed(4)}</div>
+      <div style="font-size:11px;color:var(--text2)">$${(t.amt*t.p).toFixed(2)}</div>
+    </div></div>`).join('');
+  const base=total,vs=[0.93,0.96,0.91,1.02,0.98,1.04,1.00].map(m=>base*m),mx=Math.max(...vs);
+  document.getElementById('chartEl').innerHTML=vs.map((v,i)=>`
+    <div class="bar-w">
+      <div class="bar" style="height:${Math.round((v/mx)*85)}px;background:${i===6?'linear-gradient(180deg,var(--accent2),var(--accent2)88)':'linear-gradient(180deg,var(--accent),var(--accent)88)'}"></div>
+      <div class="bar-l">${['M','T','W','T','F','S','S'][i]}</div>
     </div>`).join('');
-
-  // Chart
-  const base = totalUSD;
-  const vals = [0.93, 0.96, 0.91, 1.02, 0.98, 1.04, 1.00].map(m => base * m);
-  const max = Math.max(...vals);
-  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-  document.getElementById('chartBars').innerHTML = vals.map((v, i) => `
-    <div class="bar-wrap">
-      <div class="bar" style="height:${Math.round((v/max)*90)}px;background:${i===6?'linear-gradient(180deg,var(--accent2),var(--accent2)88)':'linear-gradient(180deg,var(--accent),var(--accent)88)'}" title="$${v.toFixed(0)}"></div>
-      <div class="bar-label">${days[i]}</div>
-    </div>`).join('');
-
-  // Activity (simulated — real tx history needs paid RPC)
-  const activities = [
-    { type: 'Received', detail: walletAddress.slice(0,4)+'...'+walletAddress.slice(-4), amt: '+' + data.sol.toFixed(3) + ' SOL', color: 'var(--accent2)', time: 'Recent' },
-    { type: 'Balance', detail: 'USDC stablecoin', amt: '$' + data.usdc.toFixed(2), color: 'var(--accent3)', time: 'Current' },
-  ];
-  document.getElementById('activityList').innerHTML = activities.map(a => `
-    <div class="activity-row">
-      <div class="activity-dot" style="background:${a.color}"></div>
-      <div>
-        <div style="font-size:12px;font-weight:500">${a.type}</div>
-        <div style="font-size:11px;color:var(--text2)">${a.detail}</div>
-      </div>
-      <div style="margin-left:auto;text-align:right">
-        <div style="font-family:'Space Mono',monospace;font-size:12px;color:${a.color}">${a.amt}</div>
-        <div style="font-size:10px;color:var(--text3)">${a.time}</div>
-      </div>
-    </div>`).join('');
-
-  document.getElementById('swapFromBal').textContent = data.usdc.toFixed(2) + ' USDC';
+  document.getElementById('activity').innerHTML=[
+    {t:'Received',d:wAddr.slice(0,6)+'...'+wAddr.slice(-4),a:'+'+sol.toFixed(3)+' SOL',c:'var(--accent2)',time:'Recent'},
+    {t:'Balance',d:'USDC stablecoin',a:'$'+usdc.toFixed(2),c:'var(--accent3)',time:'Current'},
+  ].map(x=>`<div class="activity-row">
+    <div class="dot" style="background:${x.c}"></div>
+    <div><div style="font-size:12px;font-weight:500">${x.t}</div><div style="font-size:11px;color:var(--text2)">${x.d}</div></div>
+    <div style="margin-left:auto;text-align:right">
+      <div style="font-family:'Space Mono',monospace;font-size:12px;color:${x.c}">${x.a}</div>
+      <div style="font-size:10px;color:var(--text3)">${x.time}</div>
+    </div></div>`).join('');
+  document.getElementById('sfBal').textContent=usdc.toFixed(2)+' USDC';
 }
 
-function resetDashboard() {
-  ['solBal','usdcBal','totalVal'].forEach(id => document.getElementById(id).textContent = '—');
-  document.getElementById('miniVal').textContent = '$0.00';
-  document.getElementById('miniChange').textContent = 'Connect wallet to load';
-  document.getElementById('miniChange').style.color = 'var(--text3)';
-  document.getElementById('tokenList').innerHTML = '<div style="color:var(--text3);font-size:13px;text-align:center;padding:24px">Connect wallet to see holdings</div>';
-  document.getElementById('chartBars').innerHTML = '<div style="color:var(--text3);font-size:13px;text-align:center;width:100%">Connect wallet</div>';
-  document.getElementById('activityList').innerHTML = '<div style="color:var(--text3);font-size:13px;text-align:center;padding:20px">Connect wallet to see transactions</div>';
-}
-
-// ─── AI CHAT (calls backend /api/chat) ────────────────────
-async function sendMessage() {
-  const input = document.getElementById('chatInput');
-  const msg = input.value.trim();
-  if (!msg || isLoading) return;
-  input.value = '';
-  autoResize(input);
-  document.getElementById('emptyState').style.display = 'none';
-  appendMsg(msg, 'user');
+// ── AI CHAT ─────────────────────────────────────────────
+async function send(){
+  const inp=document.getElementById('chatIn');
+  const msg=inp.value.trim();
+  if(!msg||busy)return;
+  inp.value='';resize(inp);
+  document.getElementById('emptyEl').style.display='none';
+  addMsg(msg,'user');
   await callAI(msg);
 }
+function sq(t){go('chat');document.getElementById('emptyEl').style.display='none';addMsg(t,'user');callAI(t);}
 
-function sendQuick(text) {
-  switchView('chat');
-  document.getElementById('emptyState').style.display = 'none';
-  appendMsg(text, 'user');
-  callAI(text);
-}
-
-async function callAI(userMsg) {
-  isLoading = true;
-  document.getElementById('sendBtn').disabled = true;
+async function callAI(msg){
+  busy=true;document.getElementById('sendBtn').disabled=true;
   showTyping();
-
-  // Build portfolio context from real wallet data
-  let ctx = 'No wallet connected.';
-  if (walletConnected && walletData) {
-    const total = (walletData.sol * SOL_PRICE) + walletData.usdc;
-    ctx = `User wallet: ${walletAddress.slice(0,8)}...
-Real-time balances: ${walletData.sol.toFixed(4)} SOL ($${(walletData.sol*SOL_PRICE).toFixed(2)}), ${walletData.usdc.toFixed(2)} USDC
-Total portfolio value: $${total.toFixed(2)}
-SOL price: $${SOL_PRICE}
-Network: Solana Mainnet`;
+  let ctx='No wallet connected.';
+  if(wData){
+    const tot=(wData.sol*PRICES.SOL)+wData.usdc;
+    ctx=`Wallet: ${wAddr.slice(0,8)}... | SOL: ${wData.sol.toFixed(4)} ($${(wData.sol*PRICES.SOL).toFixed(2)}) | USDC: $${wData.usdc.toFixed(2)} | Total: $${tot.toFixed(2)} | SOL price: $${PRICES.SOL}`;
   }
-
-  chatHistory.push({ role: 'user', content: userMsg });
-
-  try {
-    const resp = await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: chatHistory, portfolioContext: ctx })
-    });
-
-    if (!resp.ok) throw new Error('API error ' + resp.status);
-    const data = await resp.json();
-    const reply = data.reply || 'Sorry, I could not process that.';
-    chatHistory.push({ role: 'assistant', content: reply });
-    removeTyping();
-    appendMsg(reply, 'ai');
-
-  } catch (err) {
-    removeTyping();
-    appendMsg('Sorry, I could not connect to the AI backend. If you are running this locally, please deploy to Vercel first so the /api/chat endpoint works.', 'ai');
+  chatHist.push({role:'user',content:msg});
+  try{
+    const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({messages:chatHist,portfolioContext:ctx})});
+    if(!r.ok)throw new Error(r.status);
+    const d=await r.json();
+    const reply=d.reply||'No response';
+    chatHist.push({role:'assistant',content:reply});
+    rmTyping();addMsg(reply,'ai');
+  }catch(e){
+    rmTyping();
+    addMsg('Could not reach AI backend. Make sure the Vercel /api/chat function is deployed with your ANTHROPIC_API_KEY environment variable set.','ai');
   }
-
-  isLoading = false;
-  document.getElementById('sendBtn').disabled = false;
+  busy=false;document.getElementById('sendBtn').disabled=false;
 }
 
-function appendMsg(text, role) {
-  const el = document.createElement('div');
-  el.className = 'msg ' + role;
-  el.innerHTML = `<div class="avatar ${role}">${role==='ai'?'✦':'S'}</div><div class="bubble ${role}">${fmtMsg(text)}</div>`;
-  const msgs = document.getElementById('chatMessages');
-  msgs.appendChild(el);
-  msgs.scrollTop = msgs.scrollHeight;
+function addMsg(txt,role){
+  const el=document.createElement('div');
+  el.className='msg '+role;
+  el.innerHTML=`<div class="av ${role}">${role==='ai'?'✦':'S'}</div><div class="bub ${role}">${fmt(txt)}</div>`;
+  const c=document.getElementById('chatMsgs');c.appendChild(el);c.scrollTop=c.scrollHeight;
+}
+function fmt(t){return t.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/`(.*?)`/g,'<code style="background:var(--bg3);padding:2px 6px;border-radius:4px;font-family:Space Mono,monospace;font-size:12px">$1</code>');}
+function showTyping(){const el=document.createElement('div');el.className='msg ai';el.id='typ';el.innerHTML='<div class="av ai">✦</div><div class="bub ai"><div class="typing"><span></span><span></span><span></span></div></div>';const c=document.getElementById('chatMsgs');c.appendChild(el);c.scrollTop=c.scrollHeight;}
+function rmTyping(){const t=document.getElementById('typ');if(t)t.remove();}
+
+// ── SWAP ─────────────────────────────────────────────────
+function calcSwap(){
+  const f=document.getElementById('sfTok').value,t=document.getElementById('stTok').value;
+  const a=parseFloat(document.getElementById('sfAmt').value)||0;
+  if(f===t){document.getElementById('stAmt').textContent='—';return;}
+  const out=(a*(PRICES[f]||1))/(PRICES[t]||1);
+  document.getElementById('stAmt').textContent=out.toFixed(t==='USDC'?2:5);
+  document.getElementById('swapRate').textContent='1 '+f+' = '+((PRICES[f]||1)/(PRICES[t]||1)).toFixed(5)+' '+t;
+}
+function flipSwap(){const f=document.getElementById('sfTok').value,t=document.getElementById('stTok').value;document.getElementById('sfTok').value=t;document.getElementById('stTok').value=f;calcSwap();}
+function doSwap(){
+  if(!wallet){toast('Connect Phantom first','err');return;}
+  const f=document.getElementById('sfTok').value,t=document.getElementById('stTok').value,a=document.getElementById('sfAmt').value;
+  toast('Opening Jupiter for swap...','ok');
+  setTimeout(()=>window.open(`https://jup.ag/swap/${f}-${t}`,'_blank'),800);
 }
 
-function fmtMsg(t) {
-  return t.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/`(.*?)`/g,'<code style="background:var(--bg3);padding:2px 6px;border-radius:4px;font-family:Space Mono,monospace;font-size:12px">$1</code>');
-}
-
-function showTyping() {
-  const el = document.createElement('div');
-  el.className = 'msg ai'; el.id = 'typing';
-  el.innerHTML = '<div class="avatar ai">✦</div><div class="bubble ai"><div class="typing"><span></span><span></span><span></span></div></div>';
-  const msgs = document.getElementById('chatMessages');
-  msgs.appendChild(el); msgs.scrollTop = msgs.scrollHeight;
-}
-
-function removeTyping() {
-  const t = document.getElementById('typing');
-  if (t) t.remove();
-}
-
-// ─── SWAP ─────────────────────────────────────────────────
-function calcSwap() {
-  const from = document.getElementById('swapFrom').value;
-  const to = document.getElementById('swapTo').value;
-  const amt = parseFloat(document.getElementById('swapFromAmt').value) || 0;
-  if (from === to) { document.getElementById('swapToAmt').textContent = '—'; return; }
-  const out = (amt * (PRICES[from]||1)) / (PRICES[to]||1);
-  document.getElementById('swapToAmt').textContent = out.toFixed(to==='USDC'?2:5);
-  document.getElementById('swapRate').textContent = '1 ' + from + ' = ' + ((PRICES[from]||1)/(PRICES[to]||1)).toFixed(5) + ' ' + to;
-}
-
-function flipSwap() {
-  const f = document.getElementById('swapFrom').value;
-  const t = document.getElementById('swapTo').value;
-  document.getElementById('swapFrom').value = t;
-  document.getElementById('swapTo').value = f;
-  calcSwap();
-}
-
-function doSwap() {
-  if (!walletConnected) { showToast('Connect Phantom wallet first', 'error'); return; }
-  const from = document.getElementById('swapFrom').value;
-  const to = document.getElementById('swapTo').value;
-  const amt = document.getElementById('swapFromAmt').value;
-  const out = document.getElementById('swapToAmt').textContent;
-  showToast(`Swap preview: ${amt} ${from} → ${out} ${to}\nOpening Jupiter...`, 'success');
-  setTimeout(() => window.open(`https://jup.ag/swap/${from}-${to}`, '_blank'), 1000);
-}
-
-// ─── STAKE ────────────────────────────────────────────────
-function renderValidators() {
-  document.getElementById('validatorList').innerHTML = VALIDATORS.map((v, i) => `
-    <div class="validator-row ${i===selectedValidator?'selected':''}" onclick="selectValidator(${i})">
-      <span style="font-size:20px">${v.icon}</span>
-      <div>
-        <div style="font-size:13px;font-weight:500">${v.name}</div>
-        <div style="font-size:11px;color:var(--text2)">${v.desc} · Commission ${v.commission}</div>
-      </div>
-      <div class="val-apy">${v.apy}</div>
+// ── STAKE ────────────────────────────────────────────────
+function renderVals(){
+  document.getElementById('valList').innerHTML=VALS.map((v,i)=>`
+    <div class="vrow ${i===selVal?'sel':''}" onclick="selV(${i})">
+      <span style="font-size:18px">${v.icon}</span>
+      <div><div style="font-size:13px;font-weight:500">${v.name}</div><div style="font-size:11px;color:var(--text2)">${v.desc} · ${v.commission} commission</div></div>
+      <div style="font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:var(--accent2);margin-left:auto">${v.apy}</div>
     </div>`).join('');
-  updateEarnings();
+  updEarnings();
+}
+function selV(i){selVal=i;renderVals();}
+function updEarnings(){const a=parseFloat(document.getElementById('stakeAmt').value)||0;document.getElementById('earnings').textContent=(a*parseFloat(VALS[selVal].apy)/100).toFixed(4);}
+function doStake(){
+  if(!wallet){toast('Connect Phantom first','err');return;}
+  toast('Opening Marinade Finance...','ok');
+  setTimeout(()=>window.open('https://marinade.finance','_blank'),800);
 }
 
-function selectValidator(i) { selectedValidator = i; renderValidators(); }
-
-function updateEarnings() {
-  const amt = parseFloat(document.getElementById('stakeAmt').value) || 0;
-  const apy = parseFloat(VALIDATORS[selectedValidator].apy) / 100;
-  document.getElementById('stakeEarnings').textContent = (amt * apy).toFixed(4);
+// ── NAV ──────────────────────────────────────────────────
+const VIEWS={dash:'dashView',chat:'chatView',swap:'swapView',stake:'stakeView'};
+const TITLES={dash:['Dashboard','Your live Solana portfolio'],chat:['AI Copilot','Ask anything about DeFi, staking, and your portfolio'],swap:['Token Swap','Swap via Jupiter — best price across all DEXes'],stake:['Stake SOL','Earn yield with top validators']};
+const NAVS={dash:'n0',chat:'n1',swap:'n2',stake:'n3'};
+let cur='dash';
+function go(v){
+  document.getElementById(VIEWS[cur]).className=document.getElementById(VIEWS[cur]).className.replace(' show','');
+  document.getElementById(NAVS[cur]).classList.remove('active');
+  cur=v;
+  const el=document.getElementById(VIEWS[v]);
+  el.className=el.className+' show';
+  document.getElementById(NAVS[v]).classList.add('active');
+  document.getElementById('pTitle').textContent=TITLES[v][0];
+  document.getElementById('pSub').textContent=TITLES[v][1];
+  if(v==='swap')calcSwap();
+  if(v==='stake')renderVals();
 }
 
-function doStake() {
-  if (!walletConnected) { showToast('Connect Phantom wallet first', 'error'); return; }
-  const v = VALIDATORS[selectedValidator];
-  const amt = document.getElementById('stakeAmt').value;
-  showToast(`Staking ${amt} SOL with ${v.name} at ${v.apy} APY...`, 'success');
-  setTimeout(() => window.open('https://marinade.finance', '_blank'), 1000);
-}
-
-// ─── NAV ──────────────────────────────────────────────────
-function switchView(view) {
-  const views = { dashboard: dashboardView, chat: chatView, swap: swapView, stake: stakeView };
-  const titles = {
-    dashboard: ['Dashboard', 'Your live Solana portfolio'],
-    chat: ['AI Copilot', 'Ask anything about DeFi, staking, and your portfolio'],
-    swap: ['Token Swap', 'Swap via Jupiter aggregator — best price guaranteed'],
-    stake: ['Stake SOL', 'Earn yield by staking with top validators']
-  };
-
-  Object.values(views).forEach(v => { v.className = v.className.replace(' active',''); v.style.display='none'; });
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-
-  const el = document.getElementById(views[view].id);
-  if (view === 'dashboard') el.className = 'dashboard active';
-  else if (view === 'chat') { el.className = 'chat-view active'; }
-  else if (view === 'swap') { el.style.display='block'; el.className='swap-wrap active'; calcSwap(); }
-  else if (view === 'stake') { el.style.display='block'; el.className='stake-wrap active'; renderValidators(); }
-
-  document.getElementById('nav-'+view).classList.add('active');
-  document.getElementById('pageTitle').textContent = titles[view][0];
-  document.getElementById('pageSub').textContent = titles[view][1];
-}
-
-// ─── UTILS ────────────────────────────────────────────────
-function refreshPortfolio() {
-  if (walletConnected) { fetchWalletData(); showToast('Refreshing wallet data...', ''); }
-  else showToast('Connect wallet first', '');
-}
-
-function showBanner(msg) {
-  const b = document.getElementById('walletBanner');
-  document.getElementById('walletBannerText').textContent = msg;
-  b.classList.add('show');
-}
-function hideBanner() { document.getElementById('walletBanner').classList.remove('show'); }
-
-function showToast(msg, type) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.className = 'toast ' + (type||'');
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3500);
-}
-
-function handleKey(e) { if (e.key==='Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } }
-function autoResize(el) { el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,120)+'px'; }
-
-// Init
-renderValidators();
-calcSwap();
-
-// Listen for Phantom disconnect
-if (window.solana) {
-  window.solana.on('disconnect', () => { if (walletConnected) disconnectWallet(); });
-}
+// ── UTILS ────────────────────────────────────────────────
+function toast(msg,type){const t=document.getElementById('toast');t.textContent=msg;t.className='toast '+(type||'');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500);}
+function onKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}}
+function resize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,100)+'px';}
+function refreshWallet(){if(wallet)loadWallet();else toast('Connect wallet first','');}
+if(window.solana)window.solana.on('disconnect',()=>{if(wallet)disconnect();});
+renderVals();calcSwap();
 </script>
 </body>
 </html>
